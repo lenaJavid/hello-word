@@ -10,6 +10,8 @@ namespace myAuthenticationProject.Controllers
     {
         public ActionResult Index()
         {
+
+            //comment
             ViewBag.Title = "Home Page";
 
             return View();

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+</head>
+<body ng-app="appModule" ng-controller="EmployeeController">
+    <div>
+        <h1> Employee Details Page</h1>
+        <br />
+        <input type="button" class="btnAdd" value=" Add A City" ng-click="AddCalled()" />
+        <div class="divList">
+            <p class="divHead">Employee List</p>
+            <table cellpadding="12" class="table table-bordered table-hover">
+                <tr>
+                    <td><b>Eid</b></td>
+                    <td><b>Ename</b></td>
+                    <td><b>ESal</b></td>
+                    <td><b>EGen</b></td>
+                    <td><b>EDOB</b></td>
+                    <td><b>Did</b></td>
+                </tr>
+                <tr ng-repeat="employee in employees">
+                    <td>
+                        {{employee.Ename}}
+                    </td>
+                    <td>
+                        {{employee.ESal}}
+                    </td>
+                    <td>
+                        {{employee.EGen}}
+                    </td>
+                    <td>
+                        {{employee.EDOB}}
+                    </td>
+                    <td>
+                        {{employee.Did}}
+                    </td>
+                    <td>
+                        <input type="button" class="btnEdit" value=" Edit" ng-click="EditEmployee()" />
+                        <input type="button" class="btnDelete" value=" Delete" ng-click="DelEmployee()" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <table ng-if="showEditForm===true">
+            <tr>
+                <th colspan="2" style="border-bottom-style:solid; border-bottom-width:thin">
+                    <h1>{{Action}} City Information</h1>
+                </th>
+            </tr>
+            <tr>
+                <td><b>Id</b></td>
+                <td>
+                    <input type="text" disabled="disabled" ng-model="city.Id" />
+                </td>
+            </tr>
+            <tr>
+                <td><b>Name</b></td>
+                <td>
+                    <input type="text" ng-model="city.Name" />
+                </td>
+            </tr>
+            <tr>
+                <td><b>Country</b></td>
+                <td>
+                    <input type="text" ng-model="city.Country" />
+                </td>
+            </tr>
+            <tr>
+                <td><b>Id2</b></td>
+                <td>
+                    <input type="text" ng-model="city.Id2" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button ng-show="AddAction" type="button" class="btn btn-default" ng-click="AddCity()">Add</button>
+                    <button ng-show="EditAction" type="button" class="btn btn-default" ng-click="EditCity()">Edit</button>
+                    <button ng-show="DeleteAction" type="button" class="btn btn-default" ng-click="DelCity()">Delete</button>
+                </td>
+
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>

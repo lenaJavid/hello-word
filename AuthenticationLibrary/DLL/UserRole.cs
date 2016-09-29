@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AuthenticationLibrary.Model;
+
+namespace AuthenticationLibrary.DLL
+{
+    class UserRole
+    {
+        OrganizationEntities OE = new OrganizationEntities();
+
+        protected internal IEnumerable<AuthenticationLibrary.Model.UserRole> GetUserRoles(int userId)
+        {
+            try
+            {
+                return OE.UserRoles.Include("tbl_Role").Where(x => x.UserUserId == userId).ToList();;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        protected internal bool Insert(AuthenticationLibrary.Model.User user, AuthenticationLibrary.Model.Role role)
+        {
+            try
+            {
+                AuthenticationLibrary.Model.UserRole obj = new AuthenticationLibrary.Model.UserRole();
+                obj.tbl_Role = new AuthenticationLibrary.Model.Role { RoleId = role.RoleId, RoleName = role.RoleName };
+                obj.User = new AuthenticationLibrary.Model.User { UserId = user.UserId, Password = user.Password, UserName = user.UserName }; 
+
+                OE.UserRoles.Add(obj);
+                OE.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+        protected internal IEnumerable<AuthenticationLibrary.Model.UserRole> GetUsersByRoleId(int roleId)
+        {
+            try
+            {
+                return OE.UserRoles.Where(x => x.tbl_RoleRoleId == roleId).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+    }
+}

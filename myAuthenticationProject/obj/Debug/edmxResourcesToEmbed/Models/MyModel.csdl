@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OrganizationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Dpt">
+    <Key>
+      <PropertyRef Name="Did" />
+    </Key>
+    <Property Name="Did" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="tbl_Emp" Relationship="Self.FK_tbl_Emp_tbl_Dpt" FromRole="tbl_Dpt" ToRole="tbl_Emp" />
+  </EntityType>
+  <EntityType Name="tbl_Emp">
+    <Key>
+      <PropertyRef Name="Eid" />
+    </Key>
+    <Property Name="Eid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ename" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ESal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="EGen" Type="Boolean" />
+    <Property Name="EDOB" Type="DateTime" Precision="3" />
+    <Property Name="Did" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_Dpt" Relationship="Self.FK_tbl_Emp_tbl_Dpt" FromRole="tbl_Emp" ToRole="tbl_Dpt" />
+  </EntityType>
+  <Association Name="FK_tbl_Emp_tbl_Dpt">
+    <End Role="tbl_Dpt" Type="Self.tbl_Dpt" Multiplicity="1" />
+    <End Role="tbl_Emp" Type="Self.tbl_Emp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Dpt">
+        <PropertyRef Name="Did" />
+      </Principal>
+      <Dependent Role="tbl_Emp">
+        <PropertyRef Name="Did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OrganizationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Dpt" EntityType="Self.tbl_Dpt" />
+    <EntitySet Name="tbl_Emp" EntityType="Self.tbl_Emp" />
+    <AssociationSet Name="FK_tbl_Emp_tbl_Dpt" Association="Self.FK_tbl_Emp_tbl_Dpt">
+      <End Role="tbl_Dpt" EntitySet="tbl_Dpt" />
+      <End Role="tbl_Emp" EntitySet="tbl_Emp" />
+    </AssociationSet>
+    <EntitySet Name="tbl_Role" EntityType="OrganizationModel.tbl_Role" />
+    <EntitySet Name="Users" EntityType="OrganizationModel.User" />
+    <EntitySet Name="tbl_UserRole" EntityType="OrganizationModel.tbl_UserRole" />
+    <AssociationSet Name="Usertbl_UserRole" Association="OrganizationModel.Usertbl_UserRole">
+      <End Role="User" EntitySet="Users" />
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="tbl_Roletbl_UserRole" Association="OrganizationModel.tbl_Roletbl_UserRole">
+      <End Role="tbl_Role" EntitySet="tbl_Role" />
+      <End Role="tbl_UserRole" EntitySet="tbl_UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_UserRole" Relationship="OrganizationModel.tbl_Roletbl_UserRole" FromRole="tbl_Role" ToRole="tbl_UserRole" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_UserRole" Relationship="OrganizationModel.Usertbl_UserRole" FromRole="User" ToRole="tbl_UserRole" />
+  </EntityType>
+  <EntityType Name="tbl_UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="OrganizationModel.Usertbl_UserRole" FromRole="tbl_UserRole" ToRole="User" />
+    <Property Name="UserUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_Role" Relationship="OrganizationModel.tbl_Roletbl_UserRole" FromRole="tbl_UserRole" ToRole="tbl_Role" />
+    <Property Name="tbl_RoleRoleId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="Usertbl_UserRole">
+    <End Type="OrganizationModel.User" Role="User" Multiplicity="1" />
+    <End Type="OrganizationModel.tbl_UserRole" Role="tbl_UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tbl_UserRole">
+        <PropertyRef Name="UserUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tbl_Roletbl_UserRole">
+    <End Type="OrganizationModel.tbl_Role" Role="tbl_Role" Multiplicity="1" />
+    <End Type="OrganizationModel.tbl_UserRole" Role="tbl_UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="tbl_UserRole">
+        <PropertyRef Name="tbl_RoleRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

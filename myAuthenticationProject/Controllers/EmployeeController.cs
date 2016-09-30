@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using myAuthenticationProject.Models;
+using AuthenticationLibrary.Model;
 
 namespace myAuthenticationProject.Controllers
 {
@@ -16,9 +16,9 @@ namespace myAuthenticationProject.Controllers
         /// GET api/Employee
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<tbl_Emp> GetCities()
+        public IEnumerable<Employee> GetCities()
         {
-            return db.tbl_Emp.AsEnumerable();
+            return db.Employees.AsEnumerable();
         }
 
 
@@ -27,14 +27,14 @@ namespace myAuthenticationProject.Controllers
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public IEnumerable<tbl_Emp> AddEmployee(tbl_Emp employee)
+        public IEnumerable<Employee> AddEmployee(Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.tbl_Emp.Add(employee);
+                db.Employees.Add(employee);
                 db.SaveChanges();
 
-                return db.tbl_Emp.AsEnumerable();
+                return db.Employees.AsEnumerable();
             }
             else
             {

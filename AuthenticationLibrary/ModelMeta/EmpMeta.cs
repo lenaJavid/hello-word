@@ -5,17 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationLibrary.ModelMeta
+namespace AuthenticationLibrary.Model
 {
     public class EmpMeta
     {
-        private string _eName;
         public int Eid { get; set; }
-        public string Ename 
-        {
-            get { return _eName; }
-            set { _eName = value + "Salam"; }
-        }
         public Nullable<decimal> ESal { get; set; }
         public Nullable<bool> EGen { get; set; }
         public Nullable<System.DateTime> EDOB { get; set; }
@@ -23,8 +17,22 @@ namespace AuthenticationLibrary.ModelMeta
     }
 
     [MetadataTypeAttribute(typeof(EmpMeta))]
-    public partial class tbl_Emp
+    public partial class Employee
     {
-
+        private string _ename;
+        public string Ename
+        {
+            get
+            {
+                return _ename;
+            }
+            set
+            {
+                if ((value == "Ali"))
+                {
+                    _ename = value + "salam";
+                }
+            }
+        }
     }
 }

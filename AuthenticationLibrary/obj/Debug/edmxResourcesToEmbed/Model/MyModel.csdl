@@ -29,17 +29,17 @@
     </Key>
     <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="tbl_UserRole" Relationship="OrganizationModel.tbl_Roletbl_UserRole" FromRole="tbl_Role" ToRole="tbl_UserRole" />
+    <NavigationProperty Name="UserRoles" Relationship="OrganizationModel.RoleUserRole" FromRole="Role" ToRole="UserRole" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="User" Relationship="OrganizationModel.Usertbl_UserRole" FromRole="tbl_UserRole" ToRole="User" />
-    <Property Name="UserUserId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="tbl_Role" Relationship="OrganizationModel.tbl_Roletbl_UserRole" FromRole="tbl_UserRole" ToRole="tbl_Role" />
-    <Property Name="tbl_RoleRoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="OrganizationModel.RoleUserRole" FromRole="UserRole" ToRole="Role" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="OrganizationModel.UserUserRole" FromRole="UserRole" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -49,7 +49,7 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="tbl_UserRole" Relationship="OrganizationModel.Usertbl_UserRole" FromRole="User" ToRole="tbl_UserRole" />
+    <NavigationProperty Name="UserRoles" Relationship="OrganizationModel.UserUserRole" FromRole="User" ToRole="UserRole" />
   </EntityType>
   <Association Name="FK_tbl_Emp_tbl_Dpt">
     <End Role="tbl_Dpt" Type="OrganizationModel.Department" Multiplicity="1" />
@@ -73,36 +73,36 @@
       <End Role="tbl_Dpt" EntitySet="Departments" />
       <End Role="tbl_Emp" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="Usertbl_UserRole" Association="OrganizationModel.Usertbl_UserRole">
-      <End Role="User" EntitySet="Users" />
-      <End Role="tbl_UserRole" EntitySet="UserRoles" />
+    <AssociationSet Name="RoleUserRole" Association="OrganizationModel.RoleUserRole">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
-    <AssociationSet Name="tbl_Roletbl_UserRole" Association="OrganizationModel.tbl_Roletbl_UserRole">
-      <End Role="tbl_Role" EntitySet="Roles" />
-      <End Role="tbl_UserRole" EntitySet="UserRoles" />
+    <AssociationSet Name="UserUserRole" Association="OrganizationModel.UserUserRole">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
     </AssociationSet>
   </EntityContainer>
-  <Association Name="Usertbl_UserRole">
+  <Association Name="RoleUserRole">
+    <End Type="OrganizationModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="OrganizationModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUserRole">
     <End Type="OrganizationModel.User" Role="User" Multiplicity="1" />
-    <End Type="OrganizationModel.UserRole" Role="tbl_UserRole" Multiplicity="*" />
+    <End Type="OrganizationModel.UserRole" Role="UserRole" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="UserId" />
       </Principal>
-      <Dependent Role="tbl_UserRole">
-        <PropertyRef Name="UserUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="tbl_Roletbl_UserRole">
-    <End Type="OrganizationModel.Role" Role="tbl_Role" Multiplicity="1" />
-    <End Type="OrganizationModel.UserRole" Role="tbl_UserRole" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Role">
-        <PropertyRef Name="RoleId" />
-      </Principal>
-      <Dependent Role="tbl_UserRole">
-        <PropertyRef Name="tbl_RoleRoleId" />
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

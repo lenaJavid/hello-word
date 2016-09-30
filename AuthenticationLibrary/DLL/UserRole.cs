@@ -15,7 +15,7 @@ namespace AuthenticationLibrary.DLL
         {
             try
             {
-                return OE.UserRoles.Include("tbl_Role").Where(x => x.UserUserId == userId).ToList();;
+                return OE.UserRoles.Include("tbl_Role").Where(x => x.UserId == userId).ToList();;
             }
             catch (Exception ex)
             {
@@ -27,7 +27,7 @@ namespace AuthenticationLibrary.DLL
             try
             {
                 AuthenticationLibrary.Model.UserRole obj = new AuthenticationLibrary.Model.UserRole();
-                obj.tbl_Role = new AuthenticationLibrary.Model.Role { RoleId = role.RoleId, RoleName = role.RoleName };
+                obj.Role = new AuthenticationLibrary.Model.Role { RoleId = role.RoleId, RoleName = role.RoleName };
                 obj.User = new AuthenticationLibrary.Model.User { UserId = user.UserId, Password = user.Password, UserName = user.UserName }; 
 
                 OE.UserRoles.Add(obj);
@@ -44,7 +44,7 @@ namespace AuthenticationLibrary.DLL
         {
             try
             {
-                return OE.UserRoles.Where(x => x.tbl_RoleRoleId == roleId).ToList();
+                return OE.UserRoles.Where(x => x.RoleId == roleId).ToList();
             }
             catch (Exception ex)
             {

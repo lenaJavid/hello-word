@@ -15,10 +15,10 @@ namespace AuthenticationLibrary.Model
     public partial class UserRole
     {
         public int Id { get; set; }
-        public int UserUserId { get; set; }
-        public int tbl_RoleRoleId { get; set; }
+        public int RoleId { get; set; }
+        public int UserId { get; set; }
     
+        public virtual Role Role { get; set; }
         public virtual User User { get; set; }
-        public virtual Role tbl_Role { get; set; }
     }
 }

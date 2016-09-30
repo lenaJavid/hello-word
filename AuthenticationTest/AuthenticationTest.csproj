@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\myAuthenticationProject\myAuthenticationProject.csproj">
-      <Project>{c866de0d-06c4-4da0-9f9e-2544b6a0054d}</Project>
-      <Name>myAuthenticationProject</Name>
+    <ProjectReference Include="..\AuthenticationLibrary\AuthenticationLibrary.csproj">
+      <Project>{222a3c26-0ad6-43b7-aa81-e5924c747028}</Project>
+      <Name>AuthenticationLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

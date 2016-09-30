@@ -15,7 +15,7 @@ namespace AuthenticationLibrary.Model
     public partial class Employee
     {
         public int Eid { get; set; }
-        public string Ename { get; set; }
+        //public string Ename { get; set; }
         public Nullable<decimal> ESal { get; set; }
         public Nullable<bool> EGen { get; set; }
         public Nullable<System.DateTime> EDOB { get; set; }

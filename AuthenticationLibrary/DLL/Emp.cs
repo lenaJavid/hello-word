@@ -15,7 +15,7 @@ namespace AuthenticationLibrary.DLL
         {
             try
             {
-                IEnumerable<Employee> emps = OE.Employees.Where(x => x.Eid == empId).ToList();
+                IEnumerable<Employee> emps = (empId==null)? OE.Employees.ToList():OE.Employees.Where(x => x.Eid == empId).ToList();
                 return emps;
             }
             catch (Exception ex)

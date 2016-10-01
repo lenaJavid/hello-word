@@ -20,6 +20,7 @@ namespace AuthenticationProjectFinal.Controllers
             emp.Did = 1;
             bool result = obj.Insert(emp);
             return View();
+            //kihjiuhi
         }
 
         public ActionResult About()

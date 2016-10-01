@@ -21,7 +21,9 @@ namespace AuthenticationProjectFinal.Controllers
             bool result = obj.Insert(emp);
             return View();
             //kihjiuhi
+
             //lkjlokjloijoijoijoijoijoij
+            //ggggggggggggg
         }
 
         public ActionResult About()

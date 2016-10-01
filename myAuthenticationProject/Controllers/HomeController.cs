@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AuthenticationLibrary.Model;
+using AuthenticationLibrary.BLL;
 
 namespace myAuthenticationProject.Controllers
 {
@@ -10,11 +12,10 @@ namespace myAuthenticationProject.Controllers
     {
         public ActionResult Index()
         {
+            AuthenticationLibrary.BLL.Emp obj = new AuthenticationLibrary.BLL.Emp();
+            IEnumerable<Employee> result = obj.GetAllEmp(null);
 
-            //comment
-            //95873495837
             ViewBag.Title = "Home Page";
-
             return View();
         }
     }

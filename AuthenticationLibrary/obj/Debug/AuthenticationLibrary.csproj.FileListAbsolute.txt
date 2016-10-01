@@ -1,4 +1,3 @@
-c:\users\lena\documents\visual studio 2013\Projects\myAuthenticationProject\AuthenticationLibrary\bin\Debug\AuthenticationLibrary.dll.config
 c:\users\lena\documents\visual studio 2013\Projects\myAuthenticationProject\AuthenticationLibrary\bin\Debug\AuthenticationLibrary.dll
 c:\users\lena\documents\visual studio 2013\Projects\myAuthenticationProject\AuthenticationLibrary\bin\Debug\AuthenticationLibrary.pdb
 c:\users\lena\documents\visual studio 2013\Projects\myAuthenticationProject\AuthenticationLibrary\bin\Debug\EntityFramework.dll

@@ -13,9 +13,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using myAuthenticationProject.Models;
 using myAuthenticationProject.Providers;
 using myAuthenticationProject.Results;
+using AuthenticationLibrary.Model;
 
 namespace myAuthenticationProject.Controllers
 {

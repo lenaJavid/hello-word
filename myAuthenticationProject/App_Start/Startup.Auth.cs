@@ -9,7 +9,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using myAuthenticationProject.Providers;
-using myAuthenticationProject.Models;
+using AuthenticationLibrary.Model;
 
 namespace myAuthenticationProject
 {
